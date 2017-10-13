@@ -28,10 +28,10 @@ time = int(input('Select time series aggregation (it should be an integer): '))
 
 
 
-# draw table of total rainfall amount every month in every year
+# table of total rainfall amount every month in every year
 table = pd.pivot_table(data, values='Rainfall amount (millimetres)', index=['Month'], columns=['Year'], aggfunc=np.sum)
 
-# clist of total rainfall values
+# list of total rainfall values
 rainfall_month = list(table.loc[(month)].values)
 
 # list of years in the table above
