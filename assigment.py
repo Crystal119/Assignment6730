@@ -10,7 +10,7 @@ import matplotlib.pyplot as mpl
         
 
 # select the path to the file to be read
-file_index = input('select weather observation station: \n1. Sydney \n2. Canberra \n3. Queanbeyan \n')
+file_index = input('select weather observation station: \n1. Sydney \n2. Canberra \n3. Queanbeyan \nEnter your choice: ')
 if file_index == '1':
     file = 'Rainfall_Sydney_066062.csv'
 if file_index == '2':
@@ -20,7 +20,7 @@ if file_index == '3':
 data = pd.read_csv(file)
 
 # select month
-month = int(input('Select the month: \n1. January \n2. February \n3. March \n4. April \n5. May \n6. June \n7. July \n8. August \n9. September \n10. October \n11. November \n12. December \n'))
+month = int(input('Select the month: \n1. January \n2. February \n3. March \n4. April \n5. May \n6. June \n7. July \n8. August \n9. September \n10. October \n11. November \n12. December \nEnter your choice: '))
 
 # select the type of time series aggregation
 time = int(input('Select time series aggregation (it should be an integer): '))
