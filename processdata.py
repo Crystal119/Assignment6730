@@ -1,3 +1,5 @@
+import pandas as pd
+
 #数据读取
 data1=pd.read_csv('Rainfall_Canberra_070247.csv')
 city1=['Canberra']*len(data1)
@@ -36,21 +38,22 @@ for j in range(0,len(day)):
         
 
 # 按月分类 统计 
-#data1.groupby('Year&Month')['aggre'].sum()
 
-datam=pd.DataFrame(data1.groupby('Year&Month')['aggre'].sum())
-datamonth = pd.DataFrame({'year&month':list(datam.index),'aggre':list(datam['aggre'])})
+data.groupby('Year&Month')['aggre'].sum()
+
+datam=pd.DataFrame(data.groupby('Year&Month')['aggre'].sum())
+datamonth = pd.DataFrame({'Year&Month':list(datam.index),'aggre':list(datam['aggre'])})
 datamonth.head(2)
 
 
 # 按某一年的每个月 
 year = 1971
-datay = data1[data1['Year']==year]
-#datay.groupby('y&m')['aggre'].sum()
+datay = data[data['Year']==year]
+#datay.groupby('Year&Month')['aggre'].sum()
 
 
 # 按年分类统计 
-datayear=pd.DataFrame(data1.groupby('Year')['aggre'].sum())
+datayear=pd.DataFrame(data.groupby('Year')['aggre'].sum())
 datayears = pd.DataFrame({'year':list(datayear.index),'aggre':list(datayear['aggre'])})
 datayears.head(2)
 
@@ -62,7 +65,7 @@ n1 = 12
 m1 = int(round(len(datayears)/n1 -0.5,0))   # 1/n th, 多少个
 
 print(len(datayears),m1)
-datayears.sort_values(['aggre'],ascending=False).head(m1)
+print (datayears.sort_values(['aggre'],ascending=False).head(m1))
 
 
 # 找 n 月份最大 
@@ -71,14 +74,14 @@ n2 = 100
 m2 = int(round(len(datamonth)/n2 -0.5,0))   # 1/n th, 多少个
 
 print(len(datamonth),m2)
-datamonth.sort_values(['aggre'],ascending=False).head(m2)
+print(datamonth.sort_values(['aggre'],ascending=False).head(m2))
 
 
 
 # 找 n 天里最大  
 n3 = 5000
 # ------- 
-m3 = int(round(len(data1)/n3 -0.5,0))   # 1/n th, 多少个
+m3 = int(round(len(data)/n3 -0.5,0))   # 1/n th, 多少个
 
-print(len(data1),m3)
-data1.sort_values(['Rainfall amount (millimetres)'],ascending=False)[['Year','Month','Day','Rainfall amount (millimetres)','Period over which rainfall was measured (days)']].head(m3)
+print(len(data),m3)
+print(data.sort_values(['Rainfall amount (millimetres)'],ascending=False)[['Year','Month','Day','Rainfall amount (millimetres)','Period over which rainfall was measured (days)']].head(m3))

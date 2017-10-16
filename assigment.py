@@ -19,6 +19,28 @@ if file_index == '3':
     file = 'Rainfall_Queanbeyan_070072.csv'
 data = pd.read_csv(file)
 
+##把 aggre 空值 变 0 
+data['aggre']=data['Rainfall amount (millimetres)']*data['Period over which rainfall was measured (days)']
+data['aggre']=data['aggre'].fillna(0)
+
+data['daily']=data['Rainfall amount (millimetres)']/data['Period over which rainfall was measured (days)']
+data['daily']=data['daily'].fillna(0)
+
+## 把 year 和 month 连起来
+data['Year&Month']=data['Year'].astype(str)+' and '+data['Month'].astype(str)
+
+# 按平均值 补了 空行 
+days=list(data[data['Period over which rainfall was measured (days)']>1]['Period over which rainfall was measured (days)'])
+amount=list(data[data['Period over which rainfall was measured (days)']>1]['daily'])
+index =list(data[data['Period over which rainfall was measured (days)']>1].index)
+day=[]
+for i in range(0,len(days)):
+    day.append(int(days[i]))
+for j in range(0,len(day)):
+    for i in range(0,day[j]):
+        data.loc[data.index == (index[1]-i), 'Period over which rainfall was measured (days)'] = amount[j]   
+      
+
 # select month
 month = int(input('Select the month: \n1. January \n2. February \n3. March \n4. April \n5. May \n6. June \n7. July \n8. August \n9. September \n10. October \n11. November \n12. December \nEnter your choice: '))
 
